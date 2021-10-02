@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
+[ext_resource path="res://Components/Cursor/Cursor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Components/Exit/Exit.tscn" type="PackedScene" id=6]
+
+[sub_resource type="TileSet" id=1]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+z_as_relative = false
+mode = 1
+tile_set = SubResource( 1 )
+cell_size = Vector2( 128, 74 )
+format = 1
+
+[node name="Cursor" parent="TileMap" instance=ExtResource( 3 )]
+z_index = 1000
+
+[node name="Player" parent="TileMap" instance=ExtResource( 4 )]
+position = Vector2( -1.78931, 180.719 )
+z_index = 1001
+
+[node name="Camera2D" type="Camera2D" parent="TileMap/Player"]
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Enemy" parent="TileMap" instance=ExtResource( 5 )]
+z_index = 1001
+
+[node name="Exit" parent="TileMap" instance=ExtResource( 6 )]

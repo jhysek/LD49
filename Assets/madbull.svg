@@ -292,9 +292,9 @@
      inkscape:window-height="900"
      id="namedview4384"
      showgrid="false"
-     inkscape:zoom="1.2177387"
-     inkscape:cx="212.23691"
-     inkscape:cy="443.40063"
+     inkscape:zoom="0.76573938"
+     inkscape:cx="351.34731"
+     inkscape:cy="293.27569"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -733,40 +733,61 @@
        style="fill:#273137;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 111.03852,347.23107 c -8.08382,10.16838 -17.149733,28.21386 -21.871703,38.05677 -4.72197,9.84291 -7.402251,14.15114 -7.873819,20.12197 -0.471568,5.97083 3.403895,9.36108 3.062039,13.99789 -0.341856,4.63681 -4.578103,8.39717 -4.811775,12.68559 -0.233672,4.28842 0.03719,8.60397 3.062039,11.81073 3.024847,3.20676 8.272456,4.14882 13.560456,4.37434 5.288003,0.22552 11.058683,-0.76584 17.059943,-3.93691 6.00126,-3.17107 9.03692,-13.80019 17.05993,-15.74763 8.02301,-1.94744 15.35937,5.25472 25.37118,6.99895 10.01181,1.74423 26.69857,3.42301 34.5573,2.6246 7.85873,-0.79841 8.47774,-0.22289 12.24815,-3.49947 3.77041,-3.27658 6.99895,-15.74763 6.99895,-15.74763 0,0 15.40297,-6.9955 24.93375,-7.43638 9.53078,-0.44088 21.8531,2.54113 30.62039,6.12408 8.76729,3.58295 12.29639,12.19484 21.43427,13.99789 9.13788,1.80305 21.78592,-1.33864 29.74553,-5.68664 7.95961,-4.348 13.5361,-9.05533 16.6225,-17.49737 3.0864,-8.44204 2.3587,-17.69544 -1.74974,-29.74552 -4.10844,-12.05009 -16.03651,-31.94824 -26.24605,-38.49421 -10.20954,-6.54597 -16.17073,-4.50345 -25.80862,-4.37434 -9.63789,0.1291 -18.2411,7.66337 -31.05782,6.12408 -12.81672,-1.5393 -27.74052,-14.62598 -41.55625,-19.24711 -13.81573,-4.62112 -28.53252,-9.44392 -40.68138,-8.74868 -12.14886,0.69524 -20.37624,4.47525 -29.74552,10.06099 -9.36928,5.58574 -16.84993,13.01562 -24.93375,23.18401 z"
        id="path5402"
-       sodipodi:nodetypes="zzzzzzzzzzzzczzzzzzzzzzzzz" />
+       sodipodi:nodetypes="zzzzzzzzzzzzczzzzzzzzzzzzz"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="opacity:0.368421;fill:url(#linearGradient5490);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 209.46121,418.97027 c 3.42608,-8.15946 7.58957,-16.01934 10.59527,-24.34283 3.11644,-8.63014 5.82078,-17.44891 7.67475,-26.43525 1.15762,-5.61107 2.67119,-11.3512 2.13188,-17.055 -0.47809,-5.05631 -2.19161,-10.07497 -4.69013,-14.49675 -2.13106,-3.77147 -4.8906,-7.45326 -8.5275,-9.80663 -5.36023,-3.46851 -12.20881,-3.74202 -18.33413,-5.54287 -6.94871,-2.04293 -20.89237,-5.96925 -20.89237,-5.96925 0,0 12.92399,17.71305 14.92312,28.14075 4.68391,24.43181 -0.5379,50.49009 -8.10112,74.18925 -2.12784,6.66754 -10.233,18.33413 -10.233,18.33413 0,0 11.3099,2.75878 17.055,2.55825 3.92859,-0.13712 11.51212,-2.55825 11.51212,-2.55825 0,0 4.51727,-11.37399 6.88611,-17.01555 z"
        id="path5404"
-       sodipodi:nodetypes="aaaaaaacaacaca" />
+       sodipodi:nodetypes="aaaaaaacaacaca"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="opacity:0.518797;fill:#cccccc;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 148.37769,323.49381 8.44179,1.80896 11.15523,-2.11045 3.31642,-3.61791 -0.60299,-4.2209 -2.41194,-1.50746 h -8.74329 l -8.44179,2.71343 -4.82388,2.71344 z"
-       id="path5406" />
+       id="path5406"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <ellipse
        style="opacity:0.511278;fill:url(#linearGradient5488);fill-opacity:1;stroke:none;stroke-width:2.26451;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:9.05804, 4.52902, 2.26451, 4.52902;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse5408"
        cx="168.46509"
        cy="368.1922"
        rx="46.474876"
-       ry="42.637505" />
+       ry="42.637505"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <ellipse
        style="opacity:0.511278;fill:url(#linearGradient5486);fill-opacity:1;stroke:none;stroke-width:2.11227;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:8.44908, 4.22454, 2.11227, 4.22454;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse5412"
        cx="295.10852"
        cy="381.73895"
        rx="42.221169"
-       ry="40.834763" />
+       ry="40.834763"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="fill:#e6e6e6;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 98.352927,376.97659 c -0.56783,-4.42709 -4.26101,-8.62304 -8.31125,-10.49842 -7.811107,-3.61677 -17.276757,2.01587 -25.808611,0.87487 -8.319905,-1.11266 -15.796329,-5.95682 -24.058879,-7.43638 -3.049155,-0.54601 -9.279116,-0.50719 -9.279116,-0.50719 0,0 14.592314,11.84624 23.277009,14.94251 8.43295,3.00653 18.447126,-0.44741 26.683484,3.06204 5.049512,2.15156 7.344463,11.76297 12.685593,10.49842 3.87541,-0.91753 5.31843,-6.98567 4.81177,-10.93585 z"
        id="path5414"
-       sodipodi:nodetypes="aaaacaaaa" />
+       sodipodi:nodetypes="aaaacaaaa"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="fill:#cccccc;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 88.165147,384.95395 c -2.925606,3.26125 3.42343,11.46338 0.43743,15.31019 -2.985991,3.84681 -6.425917,2.92104 -13.560453,3.06204 -7.134536,0.141 -18.854996,-2.78149 -28.43322,-5.24921 -9.578224,-2.46772 -28.870655,-9.62355 -28.870655,-9.62355 0,0 -0.249107,4.52003 3.936907,9.18612 4.186014,4.66609 14.974762,10.3796 24.058879,13.56046 9.084117,3.18086 21.103815,4.81809 29.745523,4.81177 8.641708,-0.006 16.370299,-0.45446 21.434269,-3.49947 5.063973,-3.04501 7.472353,-5.6227 8.311253,-10.93585 0.8389,-5.31315 -2.00255,-14.81386 -6.124083,-17.49737 -4.12153,-2.68351 -8.01024,-2.38638 -10.93585,0.87487 z"
        id="path5416"
-       sodipodi:nodetypes="zzzzczzzzzzz" />
+       sodipodi:nodetypes="zzzzczzzzzzz"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <g
        id="g5495"
        inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/leg_front_up_foreground.png"
@@ -827,22 +848,34 @@
        style="fill:#ffffff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4993)"
        d="m 21.915783,391.56645 c 0,0 14.4719,6.52833 23.373352,9.20768 8.901452,2.67935 19.054627,4.56128 26.478172,4.70511 7.423545,0.14383 6.631981,2.07621 9.68682,0.14322 3.05484,-1.93299 7.99162,-4.03733 7.99162,-4.03733 0.47915,-3.20262 1.36969,-10.98717 1.64571,-13.324 0.27602,-2.33683 0.70828,-2.83314 1.65266,-3.30533 0.94438,-0.47219 1.20735,-0.95583 2.59704,0.47219 1.38969,1.42802 1.62196,5.94268 1.41657,9.20769 -0.20539,3.26501 -0.40534,7.31076 -2.83313,9.91596 -2.42779,2.6052 -5.63401,2.90767 -10.38816,3.77752 -4.754145,0.86985 -11.693753,1.06429 -17.943179,0.23609 -6.249426,-0.8282 -12.984981,-3.53657 -19.123651,-5.43017 -6.13867,-1.8936 -13.691685,-3.6745 -17.707084,-5.90236 -4.015399,-2.22786 -6.84674,-5.66627 -6.84674,-5.66627 z"
        id="path5432"
-       sodipodi:nodetypes="czzzszzzzzzzzzc" />
+       sodipodi:nodetypes="czzzszzzzzzzzzc"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="fill:#999999;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4993)"
        d="m 23.084391,399.07893 c 0,0 20.648828,7.52999 29.55028,10.20934 8.901452,2.67935 19.054627,4.56128 26.478172,4.70511 9.967654,1.90551 7.577908,-0.49122 16.175944,-2.39161 0.47915,-3.20262 6.044133,-5.14413 6.320153,-7.48096 -0.41798,-2.56606 -2.489003,-19.63895 0.24304,-17.35727 1.38969,1.42802 3.95918,10.45017 3.75379,13.71518 -0.20539,3.26501 -1.90784,9.98186 -4.33563,12.58706 -2.427793,2.6052 -5.634013,2.90767 -10.388163,3.77752 -4.754149,0.86985 -11.693757,1.06429 -17.943183,0.23609 -6.249426,-0.8282 -12.984981,-2.03407 -19.123651,-3.92767 -6.13867,-1.8936 -13.691685,-4.00839 -17.707084,-6.23625 -4.015399,-2.22786 -13.023668,-7.83654 -13.023668,-7.83654 z"
        id="path5434"
-       sodipodi:nodetypes="czcccczzzzzzc" />
+       sodipodi:nodetypes="czcccczzzzzzc"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="fill:#ffffff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter5115)"
        d="m 94.275847,381.83619 c 0.87553,-1.94658 0.0553,-3.62094 -1.49232,-5.75606 -1.54766,-2.13512 -4.73172,-4.24695 -8.314309,-5.32969 -3.582589,-1.08274 -8.12254,0.1936 -12.578063,-0.21319 -4.455523,-0.40679 -9.561851,-1.01424 -14.070376,-2.34506 -4.508525,-1.33082 -9.002518,-4.19342 -12.791251,-5.54288 -3.788733,-1.34945 -7.427019,-2.30979 -9.806625,-2.77143 -2.379606,-0.46164 -4.327832,-0.46841 -4.327832,-0.46841 0,0 7.372445,3.23338 11.149832,4.94534 3.777387,1.71197 7.340261,3.88363 11.512126,5.32969 4.171865,1.44606 8.682699,2.57149 13.430813,3.19782 4.748114,0.62632 11.484982,-1.25149 14.923126,0.42637 3.438144,1.67786 4.133623,4.13902 5.116501,6.18244 0.982878,2.04342 -0.732106,4.56688 1.137678,5.46282 1.86978,0.89594 5.23517,-1.17118 6.1107,-3.11776 z"
        id="path5436"
-       sodipodi:nodetypes="zzzzzzzczzzzzzz" />
+       sodipodi:nodetypes="zzzzzzzczzzzzzz"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <path
        style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 165.26127,317.76545 c -3.63139,6.38403 -14.62741,2.86864 -21.10448,6.33135 -7.93202,4.24054 -15.28526,10.08201 -20.803,17.18508 -4.77114,6.14196 -7.09729,13.8689 -9.94925,21.10449 -2.05119,5.204 -2.53337,11.02224 -5.12538,15.97911 -1.63347,3.12378 -6.42718,8.39806 -6.42718,8.39806 0,0 -3.547943,0.4892 -5.331033,0.64672 -1.80472,0.15943 -3.84199,-0.57634 -5.42687,0.30149 -1.82936,1.01324 -3.617915,5.12538 -3.617915,5.12538 l -2.411941,-9.94926 c 0,0 1.931602,-3.73015 3.617916,-4.82388 1.90225,-1.23379 4.3676,-1.40992 6.63283,-1.50747 1.02134,-0.044 3.03796,0.42007 3.03796,0.42007 0,0 4.535183,-5.07413 6.308323,-7.95738 3.01506,-4.90272 4.49471,-10.61664 7.23582,-15.67762 2.88167,-5.32049 5.68103,-10.80704 9.64777,-15.37613 3.88045,-4.46969 8.57736,-8.27272 13.56717,-11.45672 5.23068,-3.3377 11.04521,-5.73795 16.88359,-7.83881 4.10555,-1.47733 8.90875,-5.54037 12.66269,-3.31642 0.713,0.4224 1.01273,1.6916 0.60298,2.41194 z"
        id="path5438"
-       sodipodi:nodetypes="aaaaacaaccaacaaaaaaa" />
+       sodipodi:nodetypes="aaaaacaaccaacaaaaaaa"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <g
        id="g5446"
        transform="translate(-0.62694916,340.80444)"
@@ -884,7 +917,10 @@
        style="fill:#333333;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 330.11297,383.24213 c 6.07775,-1.39975 0.56541,-16.00997 -0.6181,-24.72425 -1.18351,-8.71428 -3.9539,-21.84814 -6.79917,-27.19667 -2.84527,-5.34853 -3.51822,-6.24046 -5.56296,-6.18107 -2.04474,0.0594 -1.79686,-1.76991 -2.47243,3.09053 -0.67557,4.86044 8.33417,16.07196 9.88971,23.48804 1.55554,7.41609 -0.89599,14.66545 0.29944,19.9774 1.19543,5.31195 -0.81424,12.94577 5.26351,11.54602 z"
        id="path5478"
-       sodipodi:nodetypes="zzzzzzzz" />
+       sodipodi:nodetypes="zzzzzzzz"
+       inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/body.png"
+       inkscape:export-xdpi="100.0441"
+       inkscape:export-ydpi="100.0441" />
     <g
        id="g5519"
        inkscape:export-filename="/Users/jh/code/my/games/LD49/Components/Enemy/assets/leg_back_up_foreground.png"

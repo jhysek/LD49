@@ -8,30 +8,38 @@ var map_size = Vector2(24, 24)
 var traversing_graph
 
 var FallingTile = preload("res://Components/FallingTile/FallingTile.tscn")
+var Enemy = preload("res://Components/Enemy/Enemy.tscn")
 var tiles: Array = []
 
 onready var tilemap = $TileMap
 onready var player = $TileMap/Player
 var paused = true
-	
+var exit_pos = Vector2(0,0)
+
 func _ready():
+	Transition.openScene()
 	generate_empty_tiles(map_size.x, map_size.y)
 	generate_terrain()
 	generate_graph()
 	correct_terrain()
+	place_exit()
 	draw_terrain()
 	place_player()
-	place_exit()
-	for enemy in $TileMap/Enemies.get_children():
+
+	for _i in range(Settings.current_enemies()):
+		var enemy = Enemy.instance()
+		enemy.position = tilemap.map_to_world(Vector2(10,10))
+		enemy.z_index = 1001
+		$TileMap/Enemies.add_child(enemy)
+		print("PLAYER POS: ", player.last_map_pos)
 		enemy.place(random_accessible_place(player.last_map_pos))
 	
 	Settings.reset_stats()
+	$CanvasLayer/Control/Objectives2.text = Settings.current_objectives()
 	$CanvasLayer/Control/Objectives/Message.text = Settings.current_objectives()
-	Transition.openScene()
-	
-	
+	$CanvasLayer/Control/Objectives/No.text = str(Settings.current_level + 1)
 func generate_empty_tiles(w, h):
-	for x in range(w):
+	for _x in range(w):
 		var col = []
 		col.resize(h)
 		tiles.append(col)
@@ -41,28 +49,36 @@ func start():
 	paused = false
 	
 func win():
+	stop_enemies()
 	var is_next = Settings.next_level()
+	print("is next: ", str(is_next))
 	if is_next:
 		paused = true
-		print("restarting level!")
-		restart_level()
+		$RestartTimeout.start()
 	else:
 		Transition.switchTo("res://Scenes/Finished.tscn")
 
 func lose():
+	stop_enemies()
 	if !paused:
 		paused = true
+		print("LOSED... restart timer starting")
 		$RestartTimeout.start()
+		
+func stop_enemies():
+	for enemy in $TileMap/Enemies.get_children():
+		enemy.stop()
 		
 func restart_level():
 	print("Restarting.. ")
 	Transition.switchTo("res://Scenes/Game.tscn")
 		
-func crash_tile(map_pos):
+func crash_tile(map_pos, audio = false):
 	var tile = get_tile_at(map_pos)
 	if tile and tile.type != CELL_EXIT:
 		tile.fall() 
-		#$Sfx/BrickFall.play()
+		if audio:
+			$Sfx/BrickFall.play()
 	
 func tile_destroyed(map_pos):
 	tilemap.set_cell(map_pos.x, map_pos.y, -1)
@@ -77,7 +93,6 @@ func create_tile(map_pos, number):
 	tile.position = tilemap.map_to_world(map_pos) + Vector2(0,59)
 	tile.set_tile(number, map_pos)
 	tilemap.add_child(tile)
-	print(array_index(map_pos))
 	tiles[map_pos.x][map_pos.y] = tile
 	
 func get_tile_at(map_pos):
@@ -114,8 +129,8 @@ func generate_terrain():
 				tilemap.set_cell(x, y, CELL_DEADLY)
 				
 	# Fix starting corners:
-	for x in range(3):
-		for y in range(3):
+	for x in range(8):
+		for y in range(8):
 			var cell = tilemap.get_cell(x, y)
 			if !accessible_cell(cell):
 				tilemap.set_cell(x, y, 1)
@@ -146,12 +161,12 @@ func correct_terrain():
 		generate_graph()
 	
 func random_accessible_place(from):
-	var counter = 1000
+	var counter = 600
 	while counter > 0:
-		counter += 1
-		var rx = fmod(randi(), map_size.x)
-		var ry = fmod(randi(), map_size.y)
-		if get_nearest_path(from, Vector2(rx, ry)).size() > 5:
+		counter -= 1
+		var rx = fmod(randi(), map_size.x - 10) + 10
+		var ry = fmod(randi(), map_size.y - 10) + 10
+		if accessible_cell(tilemap.get_cell(rx, ry)) and get_nearest_path(from, Vector2(rx, ry)).size() > 5:
 			return Vector2(rx, ry)
 	return false
 	
@@ -222,18 +237,15 @@ func get_random_starting_pos(corner):
 	
 func place_exit():
 	var map_pos = get_random_starting_pos("top")
-	$TileMap/Exit.position = tilemap.map_to_world(map_pos)
-	$TileMap.set_cell(map_pos.x, map_pos.y, 1)
-	var tile = get_tile_at(map_pos)
-	if !tile:
-		create_tile(map_pos, CELL_EXIT)
-	else:
-		tile.set_tile(CELL_EXIT, map_pos)
+	$TileMap/Exit.position = tilemap.map_to_world((map_pos))
+	exit_pos = map_pos
+	$TileMap.set_cell(map_pos.x, map_pos.y, CELL_EXIT)
+	
 		
 func place_player():
 	var map_pos = get_random_starting_pos("bottom")
 	map_pos = get_random_starting_pos("bottom")
-	$TileMap/Player.place(map_pos)
+	player.place(map_pos)
 	var cell = $TileMap.get_cellv(map_pos)
 	if cell < 0:
 		$TileMap.set_cellv(map_pos, 1)

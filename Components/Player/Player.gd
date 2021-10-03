@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const WALK_SPEED = 300
+const WALK_SPEED = 200
 var motion = Vector2(0,0)
 var last_map_pos = Vector2(0,0)
 var external_impulse = Vector2(0,0)
@@ -22,8 +22,12 @@ func place(map_pos):
 	position = map.map_to_world(map_pos)
 	
 func teleport():
+	dead = true
+	nofall = true
+	$Sfx/Run.stop()
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("teleport")
 	print("PLAYER teleported")
-	queue_free()
 	
 func _input(event):
 	if !started and event is InputEventKey and event.pressed == true:
@@ -36,7 +40,7 @@ func _physics_process(delta):
 		if !nofall:
 			position.y += 2 * delta * WALK_SPEED
 		else:
-			print("NOFALLING...")
+			set_physics_process(false)
 		return
 		
 	if game.paused:
@@ -48,41 +52,31 @@ func _physics_process(delta):
 		motion.y -= 1
 		$Visual/Front.hide()
 		$Visual/Back.show()
-		#motion.y -= 0.6
-		#motion.x += 1
 		
 	if Input.is_action_pressed("ui_down"):
 		motion.y += 1
 		$Visual/Front.show()
 		$Visual/Back.hide()
-		#motion.y += 0.6
-		#motion.x -= 1
 		
 	if Input.is_action_pressed("ui_left"):
 		motion.x -= 1
-		#motion.y -= 0.6
-		#motion.x -= 1
 		
 	if Input.is_action_pressed("ui_right"):
 		motion.x += 1
-		
-
-		#motion.y += 0.6
-		#motion.x += 1
-		
-	#motion.x = min(1, motion.x)
-	#otion.y = min(1, motion.y)
+	
 	
 	if motion != Vector2(0,0) and air_time <= 0 and !$Sfx/Run.playing:
 		$Sfx/Run.play()
+		$AnimationPlayer.play("walk")
 		
 	if (motion == Vector2(0,0) or air_time > 0) and $Sfx/Run.playing:
 		$Sfx/Run.stop()
+		$AnimationPlayer.stop()
 	
 		
-	if Input.is_action_just_pressed("ui_accept"):
-		$AnimationPlayer.play("jump")
-		air_time = 0.7
+#	if Input.is_action_just_pressed("ui_accept"):
+#		$AnimationPlayer.play("jump")
+#	#	air_time = 0.7
 	
 	if external_impulse != Vector2(0,0):
 		print("EXTERNAL: ", external_impulse)
@@ -94,11 +88,14 @@ func _physics_process(delta):
 		position += motion * delta * WALK_SPEED
 		if air_time <= 0:
 			evaluate_position()
-		else: 
-			air_time -= delta
+#		else: 
+#			air_time -= delta
+#			if air_time <= 0:
+#				game.crash_tile(map.world_to_map(position), true)
 			
 func die(hide = false):
 	dead = true
+	$Sfx/Run.stop()
 	if hide:
 		$AnimationPlayer.play("Die")
 		nofall = true
@@ -116,7 +113,6 @@ func die(hide = false):
 func evaluate_position(force = false):
 	var map_pos = map.world_to_map(position)
 	if map_pos != last_map_pos or force:
-		#game.crash_tile(last_map_pos)
 		last_map_pos = map_pos
 		cursor.tweenTo(map.map_to_world(map_pos) + Vector2(0,37))
 		var deadly = game.deadly_cell(map_pos)

@@ -10,7 +10,7 @@ var path = []
 var target = Vector2(0,0)
 var target_map = Vector2(0,0)
 
-export var speed = 0.3
+export var speed = 0.2
 var cooldown = 0.5
 var inactive = false
 
@@ -19,13 +19,29 @@ func _ready():
 	
 func teleport():
 	inactive = true
-	# TODO anim and sound
-	hide()
+	$Sfx/Run.stop()
+	$Sfx/StonesLoop.stop()
+	$AnimationPlayer.play("teleport")
+	
+func stop():
+	$Tween.stop_all()
+	inactive = true
+	$Timer.stop()
 
 func place(map_pos):
 	if map_pos:
 		last_map_pos = map_pos
 		position = map.map_to_world(map_pos)
+	
+func fall():
+	z_index=0
+	$Sfx/Run.stop()
+	$Tween.stop_all()
+	var new_position = Vector2(position.x, position.y + 1000)
+	$Tween.interpolate_property(self, 'position', position, new_position, 2, Tween.TRANS_EXPO, Tween.EASE_IN)
+	$Tween.interpolate_property(self, 'modulate', modulate, Color(1,1,1,0), 2, Tween.TRANS_EXPO, Tween.EASE_IN)
+	$Tween.start()
+	
 	
 func jump_to(map_pos, jump_speed):
 	var new_pos = map.map_to_world(map_pos)
@@ -71,7 +87,7 @@ func chase_player():
 func _on_Timer_timeout():
 	if !game.paused:
 		cooldown = 0
-		if $AnimationPlayer.current_animation != "Run":
+		if !inactive and $AnimationPlayer.current_animation != "Run":
 			$AnimationPlayer.play("Run")
 			$Sfx/Run.play()
 			$Sfx/StonesLoop.play()
@@ -80,13 +96,23 @@ func _on_Timer_timeout():
 		$Timer.start()
 		
 func _on_Tween_tween_completed(object, key):
+	if inactive:
+		return
 	game.crash_tile(last_map_pos)
 	last_map_pos = map.world_to_map(position)
+	
+	var deadly = game.deadly_cell(last_map_pos)
+	if deadly == 1:
+		$Timer.stop()
+		fall()
+		return
 	chase_player()
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):
 		var impulse = (position - last_pos).normalized() * 200
-		print(" >>>>> ", impulse)
 		body.external_impulse = impulse
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "teleport":
+		queue_free()

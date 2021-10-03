@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/particle.png" type="Texture" id=1]
 [ext_resource path="res://Components/Enemy/Enemy.gd" type="Script" id=2]
@@ -145,6 +145,45 @@ tracks/9/keys = {
 "values": [ Vector2( 127.488, 3.53268 ), Vector2( 126.18, -10.6398 ), Vector2( 126.18, 0 ) ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "teleport"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -14.8053, -10.9277 ), Vector2( -9.03137, -139.004 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.2, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy",
 ]]
@@ -174,7 +213,7 @@ offset = Vector2( 0.916138, 23.9344 )
 
 [node name="Hoof" type="Sprite" parent="Visual/Body/Leg1"]
 position = Vector2( -1.69467, 68.7365 )
-rotation = -0.359347
+rotation = -0.359348
 texture = ExtResource( 3 )
 offset = Vector2( -21.9233, 34.1957 )
 
@@ -198,21 +237,21 @@ offset = Vector2( 0.412323, 24.3897 )
 
 [node name="Hoof" type="Sprite" parent="Visual/Body/Leg3"]
 position = Vector2( 2.6528, 59.1891 )
-rotation = 0.389537
+rotation = 0.389538
 texture = ExtResource( 10 )
 offset = Vector2( -10.538, 41.9459 )
 
 [node name="Leg4" type="Sprite" parent="Visual/Body"]
 show_behind_parent = true
 position = Vector2( -6.19353, -2.46371 )
-rotation = 0.00353217
+rotation = 0.00353216
 texture = ExtResource( 9 )
 offset = Vector2( -5.43924, 23.6142 )
 
 [node name="Hoof" type="Sprite" parent="Visual/Body/Leg4"]
 show_behind_parent = true
 position = Vector2( -26.7906, 68.3865 )
-rotation = -0.423587
+rotation = -0.423586
 texture = ExtResource( 8 )
 offset = Vector2( -11.2802, 25.028 )
 
@@ -230,6 +269,7 @@ autostart = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 3.0
 anims/Run = SubResource( 3 )
+anims/teleport = SubResource( 4 )
 
 [node name="Sfx" type="Node" parent="."]
 
@@ -246,3 +286,4 @@ max_distance = 3000.0
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

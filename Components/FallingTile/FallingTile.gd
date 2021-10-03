@@ -20,11 +20,10 @@ func set_tile(t, map_position):
 	map_pos = map_position
 	var region = regions[t]
 	region_rect = Rect2(region, tile_size)
+	
 	if t == 4:
 		light_mask = 1
-	else:
-		light_mask = 0
-
+	
 func fall():
 	if !disabled:
 		disabled = true

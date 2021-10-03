@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Components/Player/assets/head_front.png" type="Texture" id=1]
 [ext_resource path="res://Components/Player/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Components/Player/assets/body_back.png" type="Texture" id=4]
 [ext_resource path="res://Components/Player/assets/head_back.png" type="Texture" id=5]
 [ext_resource path="res://Components/Player/assets/hand.png" type="Texture" id=6]
+[ext_resource path="res://Components/Player/run.wav" type="AudioStream" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
@@ -16,6 +17,7 @@ radius = 31.728
 
 [sub_resource type="Animation" id=4]
 resource_name = "Die"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visual:rotation_degrees")
 tracks/0/interp = 1
@@ -27,6 +29,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 0.153893, 1 ),
 "update": 0,
 "values": [ 0.0, 100.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 0.466516, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.975808 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -104,6 +118,7 @@ linear_damp = 10.0
 script = ExtResource( 2 )
 
 [node name="Visual" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.975808 )
 position = Vector2( 0, -14.06 )
 scale = Vector2( 0.4, 0.4 )
 
@@ -152,5 +167,11 @@ shape = SubResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Die = SubResource( 4 )
 anims/jump = SubResource( 3 )
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Run" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 7 )
+volume_db = -10.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

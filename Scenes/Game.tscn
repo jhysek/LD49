@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particle.png" type="Texture" id=2]
@@ -6,8 +6,29 @@
 [ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Components/Enemy/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Components/Exit/Exit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/ambient.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Assets/crack.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/light.png" type="Texture" id=9]
+[ext_resource path="res://Assets/BEBAS___.otf" type="DynamicFontData" id=10]
 
 [sub_resource type="TileSet" id=1]
+
+[sub_resource type="Animation" id=3]
+resource_name = "light"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2.5, 4, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -230.434 ), Vector2( -497.069, -134.593 ), Vector2( 8.61157, 635.969 ), Vector2( 528.245, -167.442 ), Vector2( 237.71, -202.087 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Start"
@@ -35,6 +56,26 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, -700 ), Vector2( 0, -276.124 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasLayer/Control/Objectives:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.435275, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.45098 )
+
+[sub_resource type="DynamicFont" id=5]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -70,16 +111,103 @@ position = Vector2( 0, -700 )
 current = true
 zoom = Vector2( 3, 3 )
 
-[node name="Enemy" parent="TileMap" instance=ExtResource( 5 )]
+[node name="Enemies" type="Node2D" parent="TileMap"]
+
+[node name="Enemy" parent="TileMap/Enemies" instance=ExtResource( 5 )]
+z_index = 1001
+
+[node name="Enemy2" parent="TileMap/Enemies" instance=ExtResource( 5 )]
 z_index = 1001
 
 [node name="Exit" parent="TileMap" instance=ExtResource( 6 )]
 z_index = 1000
+
+[node name="Light2D" type="Light2D" parent="TileMap"]
+visible = false
+light_mask = 2
+position = Vector2( 1, -230.434 )
+texture = ExtResource( 9 )
+texture_scale = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TileMap/Light2D"]
+autoplay = "light"
+anims/light = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 2 )
 
 [node name="RestartTimeout" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="BrickFall" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 8 )
+
+[node name="Ambient" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 7 )
+autoplay = true
+mix_target = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.320068
+margin_bottom = -0.320068
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Objectives" type="Panel" parent="CanvasLayer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -234.0
+margin_top = -89.5
+margin_right = 234.0
+margin_bottom = 89.5
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/Objectives"]
+margin_left = 0.320068
+margin_top = 6.96017
+margin_right = 469.32
+margin_bottom = 33.9602
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.713726, 1, 0.380392, 1 )
+text = "Objectives"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressAKey" type="Label" parent="CanvasLayer/Control/Objectives"]
+margin_left = 1.10999
+margin_top = 142.821
+margin_right = 470.11
+margin_bottom = 169.821
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.713726, 1, 0.380392, 1 )
+text = "Press  any  key  to  start"
+align = 1
+
+[node name="Message" type="Label" parent="CanvasLayer/Control/Objectives"]
+margin_left = 22.0
+margin_top = 48.0
+margin_right = 440.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 5 )
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="RestartTimeout" to="." method="_on_RestartTimeout_timeout"]

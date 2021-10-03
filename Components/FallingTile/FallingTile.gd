@@ -11,13 +11,19 @@ const regions = [
 
 const tile_size = Vector2(128, 118)
 
+var type = 0
 var disabled = false
 var map_pos = Vector2(0,0)
 
 func set_tile(t, map_position):
+	type = t
 	map_pos = map_position
 	var region = regions[t]
 	region_rect = Rect2(region, tile_size)
+	if t == 4:
+		light_mask = 1
+	else:
+		light_mask = 0
 
 func fall():
 	if !disabled:

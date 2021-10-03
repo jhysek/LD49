@@ -21,14 +21,15 @@ func place(map_pos):
 	last_map_pos = map_pos
 	position = map.map_to_world(map_pos)
 	
+func teleport():
+	print("PLAYER teleported")
+	queue_free()
+	
 func _input(event):
-	if Input.is_action_just_pressed("ui_up") || \
-		Input.is_action_just_pressed("ui_down") || \
-		Input.is_action_just_pressed("ui_left") || \
-		Input.is_action_just_pressed("ui_right"):
-			started = true
-			game.start()
-			set_process_input(false)
+	if !started and event is InputEventKey and event.pressed == true:
+		game.start()
+		started = true
+		set_process_input(false)
 	
 func _physics_process(delta):	
 	if dead:
@@ -71,6 +72,12 @@ func _physics_process(delta):
 		
 	#motion.x = min(1, motion.x)
 	#otion.y = min(1, motion.y)
+	
+	if motion != Vector2(0,0) and air_time <= 0 and !$Sfx/Run.playing:
+		$Sfx/Run.play()
+		
+	if (motion == Vector2(0,0) or air_time > 0) and $Sfx/Run.playing:
+		$Sfx/Run.stop()
 	
 		
 	if Input.is_action_just_pressed("ui_accept"):

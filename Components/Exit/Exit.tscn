@@ -41,7 +41,6 @@ region_rect = Rect2( 260, 0, 120, 120 )
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -24.5573 )
 texture = ExtResource( 3 )
-energy = 0.709713
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "light"

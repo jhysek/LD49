@@ -11,16 +11,21 @@ var target = Vector2(0,0)
 var target_map = Vector2(0,0)
 
 export var speed = 0.3
-
 var cooldown = 0.5
-
+var inactive = false
 
 func _ready():
 	position = map.map_to_world(last_map_pos)
+	
+func teleport():
+	inactive = true
+	# TODO anim and sound
+	hide()
 
 func place(map_pos):
-	last_map_pos = map_pos
-	position = map.map_to_world(map_pos)
+	if map_pos:
+		last_map_pos = map_pos
+		position = map.map_to_world(map_pos)
 	
 func jump_to(map_pos, jump_speed):
 	var new_pos = map.map_to_world(map_pos)
@@ -44,7 +49,7 @@ func jump_to_world(world_pos, jump_speed):
 	$Tween.start()
 	
 func chase_player():
-	if !player || game.paused:
+	if !player || game.paused || inactive:
 		return
 	
 	path = game.get_nearest_path(last_map_pos, player.last_map_pos)
@@ -54,6 +59,7 @@ func chase_player():
 			if cooldown <= 0:
 				cooldown = 0.5
 				$Timer.start()
+				$Sfx/Attack.play()
 				jump_to_world(player.position - Vector2(0, 30), 0.1)
 		else:
 			jump_to(Vector2(path[1].x, path[1].y), 0.3)
@@ -67,6 +73,8 @@ func _on_Timer_timeout():
 		cooldown = 0
 		if $AnimationPlayer.current_animation != "Run":
 			$AnimationPlayer.play("Run")
+			$Sfx/Run.play()
+			$Sfx/StonesLoop.play()
 		chase_player()
 	else:
 		$Timer.start()

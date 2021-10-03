@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/particle.png" type="Texture" id=1]
 [ext_resource path="res://Components/Enemy/Enemy.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Components/Enemy/assets/leg_back_bottom_background.png" type="Texture" id=8]
 [ext_resource path="res://Components/Enemy/assets/leg_back_up_background.png" type="Texture" id=9]
 [ext_resource path="res://Components/Enemy/assets/leg_front_bottom_background.png" type="Texture" id=10]
+[ext_resource path="res://Components/Enemy/run.wav" type="AudioStream" id=11]
+[ext_resource path="res://Components/Enemy/attack.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/stonesloop.ogg" type="AudioStream" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 55.1602
@@ -142,7 +145,9 @@ tracks/9/keys = {
 "values": [ Vector2( 127.488, 3.53268 ), Vector2( 126.18, -10.6398 ), Vector2( 126.18, 0 ) ]
 }
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -225,6 +230,18 @@ autostart = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 3.0
 anims/Run = SubResource( 3 )
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Run" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 11 )
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 12 )
+
+[node name="StonesLoop" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 13 )
+max_distance = 3000.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

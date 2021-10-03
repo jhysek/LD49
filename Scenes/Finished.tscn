@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/BEBAS___.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/Menu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0.611765, 0.803922, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.454902 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Title" type="Label" parent="."]
+margin_left = -465.0
+margin_top = -249.0
+margin_right = 457.0
+margin_bottom = -163.0
+custom_fonts/font = SubResource( 1 )
+text = "Wait... You  made  IT?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title2" type="Label" parent="."]
+margin_left = -405.448
+margin_top = -124.0
+margin_right = 428.552
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "well...  I  didn't  expect  you  to  play  it  to  the  end. 
+So  I  didn't  buy  any  Champaigne..  . Sorry.
+
+BUT  HEY,  You    probably  liked  it  so  why  don't  you   play   it  again  
+and  I'll  JUMP   for  a  few  bottles   in   the   meantime!"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="info" type="Label" parent="."]
+margin_left = -183.632
+margin_top = 249.662
+margin_right = 189.368
+margin_bottom = 263.662
+text = "Made in 48 hours for Ludum Dare #49 compo by Jiri Hysek"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartBtn" type="Button" parent="."]
+margin_left = -119.338
+margin_top = 57.0381
+margin_right = 117.662
+margin_bottom = 112.038
+custom_styles/hover = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+text = "PLAY  AGAIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Hover" type="AudioStreamPlayer" parent="Sfx"]
+
+[node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+
+[connection signal="pressed" from="StartBtn" to="." method="_on_StartBtn_pressed"]

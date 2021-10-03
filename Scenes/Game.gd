@@ -1,6 +1,7 @@
 extends Node2D
 
 const CELL_DEADLY = 4
+const CELL_EXIT = 2
 
 var SoftNoise = preload("res://Scripts/SoftNoise.gd")
 var map_size = Vector2(24, 24)
@@ -19,11 +20,15 @@ func _ready():
 	generate_graph()
 	correct_terrain()
 	draw_terrain()
-
 	place_player()
 	place_exit()
-	$TileMap/Enemy.place(random_accessible_place(player.last_map_pos))
+	for enemy in $TileMap/Enemies.get_children():
+		enemy.place(random_accessible_place(player.last_map_pos))
+	
+	Settings.reset_stats()
+	$CanvasLayer/Control/Objectives/Message.text = Settings.current_objectives()
 	Transition.openScene()
+	
 	
 func generate_empty_tiles(w, h):
 	for x in range(w):
@@ -36,9 +41,13 @@ func start():
 	paused = false
 	
 func win():
-	paused = true
-	print("YEAH!")
-	restart_level()
+	var is_next = Settings.next_level()
+	if is_next:
+		paused = true
+		print("restarting level!")
+		restart_level()
+	else:
+		Transition.switchTo("res://Scenes/Finished.tscn")
 
 func lose():
 	if !paused:
@@ -46,12 +55,14 @@ func lose():
 		$RestartTimeout.start()
 		
 func restart_level():
+	print("Restarting.. ")
 	Transition.switchTo("res://Scenes/Game.tscn")
 		
 func crash_tile(map_pos):
 	var tile = get_tile_at(map_pos)
-	if tile:
+	if tile and tile.type != CELL_EXIT:
 		tile.fall() 
+		#$Sfx/BrickFall.play()
 	
 func tile_destroyed(map_pos):
 	tilemap.set_cell(map_pos.x, map_pos.y, -1)
@@ -135,12 +146,14 @@ func correct_terrain():
 		generate_graph()
 	
 func random_accessible_place(from):
-	var rx = fmod(randi(), map_size.x)
-	var ry = fmod(randi(), map_size.y)
-	if get_nearest_path(from, Vector2(rx, ry)).size() > 5:
-		return Vector2(rx, ry)
-	else:
-		return random_accessible_place(from)
+	var counter = 1000
+	while counter > 0:
+		counter += 1
+		var rx = fmod(randi(), map_size.x)
+		var ry = fmod(randi(), map_size.y)
+		if get_nearest_path(from, Vector2(rx, ry)).size() > 5:
+			return Vector2(rx, ry)
+	return false
 	
 func accessible_cell(cell):
 	return cell >= 0 and cell != CELL_DEADLY
@@ -199,36 +212,33 @@ func get_nearest_path(from, to):
 	return traversing_graph.get_point_path(get_cell_id(from.x, from.y), get_cell_id(to.x, to.y))
 
 func get_random_starting_pos(corner):
-	var x = randi() % 3
-	var y = randi() % 3
+	var x = randi() % 3 + 2
+	var y = randi() % 3 + 2
 	var map_pos = Vector2(x, y)
 	if corner == "bottom":
 		map_pos = map_size - Vector2(x + 1, y + 1)
+	
 	return map_pos
 	
 func place_exit():
 	var map_pos = get_random_starting_pos("top")
-	map_pos = get_random_starting_pos("top")
 	$TileMap/Exit.position = tilemap.map_to_world(map_pos)
 	$TileMap.set_cell(map_pos.x, map_pos.y, 1)
 	var tile = get_tile_at(map_pos)
 	if !tile:
-		create_tile(map_pos, 2)
+		create_tile(map_pos, CELL_EXIT)
 	else:
-		tile.set_tile(2, map_pos)
+		tile.set_tile(CELL_EXIT, map_pos)
 		
 func place_player():
 	var map_pos = get_random_starting_pos("bottom")
 	map_pos = get_random_starting_pos("bottom")
 	$TileMap/Player.place(map_pos)
-	
 	var cell = $TileMap.get_cellv(map_pos)
 	if cell < 0:
 		$TileMap.set_cellv(map_pos, 1)
 	if cell == 3:
 		$TileMap.set_cellv(map_pos, 2)
-
-
 
 func _on_RestartTimeout_timeout():
 	print("RESTART")

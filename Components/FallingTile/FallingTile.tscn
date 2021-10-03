@@ -7,9 +7,12 @@
 position = Vector2( 0, -5 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 118, 128, 118 )
+region_rect = Rect2( 128, 118, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

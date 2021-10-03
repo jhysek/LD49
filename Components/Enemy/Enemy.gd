@@ -23,14 +23,24 @@ func place(map_pos):
 	position = map.map_to_world(map_pos)
 	
 func jump_to(map_pos, jump_speed):
+	var new_pos = map.map_to_world(map_pos)
+	
+	if new_pos.x > position.x:
+		$Visual.scale.x = -0.6
+	elif new_pos.x < position.x:
+		$Visual.scale.x = 0.6
 	last_pos = position
 	$Tween.stop_all()
-	$Tween.interpolate_property(self, 'position', position, map.map_to_world(map_pos), jump_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, 'position', position, new_pos, jump_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
 func jump_to_world(world_pos, jump_speed):
+	if world_pos.x > position.x:
+		$Visual.scale.x = -0.6
+	elif world_pos.x < position.x:
+		$Visual.scale.x = 0.6
 	$Tween.stop_all()
-	$Tween.interpolate_property(self, 'position', position, world_pos, jump_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, 'position', position, world_pos, jump_speed, Tween.TRANS_LINEAR)
 	$Tween.start()
 	
 func chase_player():
@@ -53,13 +63,18 @@ func chase_player():
 		$Timer.start()
 
 func _on_Timer_timeout():
-	cooldown = 0
-	chase_player()
-
+	if !game.paused:
+		cooldown = 0
+		if $AnimationPlayer.current_animation != "Run":
+			$AnimationPlayer.play("Run")
+		chase_player()
+	else:
+		$Timer.start()
+		
 func _on_Tween_tween_completed(object, key):
+	game.crash_tile(last_map_pos)
 	last_map_pos = map.world_to_map(position)
 	chase_player()
-
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):

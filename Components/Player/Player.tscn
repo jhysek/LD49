@@ -1,29 +1,156 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Components/Player/assets/head_front.png" type="Texture" id=1]
 [ext_resource path="res://Components/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Components/Player/assets/body_front.png" type="Texture" id=3]
+[ext_resource path="res://Components/Player/assets/body_back.png" type="Texture" id=4]
+[ext_resource path="res://Components/Player/assets/head_back.png" type="Texture" id=5]
+[ext_resource path="res://Components/Player/assets/hand.png" type="Texture" id=6]
 
-[sub_resource type="PhysicsMaterial" id=2]
+[sub_resource type="PhysicsMaterial" id=1]
 rough = true
 absorbent = true
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 31.728
+
+[sub_resource type="Animation" id=4]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visual:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.153893, 1 ),
+"update": 0,
+"values": [ 0.0, 100.5 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 0.267943, 1.86607, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -14.06 ), Vector2( 0, -60 ), Vector2( 0, -14.06 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual/Back/Body/HandLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -61.18, 6.45999 ), Vector2( -64.03, -43.89 ), Vector2( -61.18, 6.45999 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual/Back/Body/HandRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 72.58, -1.52588e-05 ), Vector2( 69.73, -50.35 ), Vector2( 72.58, -1.52588e-05 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual/Front/Body/HandLeft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -61.18, 6.45999 ), Vector2( -64.03, -49.59 ), Vector2( -61.18, 6.45999 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Visual/Front/Body/HandRight:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 65.36, 9.12 ), Vector2( 62.51, -46.93 ), Vector2( 65.36, 9.12 ) ]
+}
 
 [node name="Player" type="RigidBody2D" groups=[
 "Player",
 ]]
 mode = 2
 mass = 10.2041
-physics_material_override = SubResource( 2 )
+physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 linear_damp = 10.0
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -31.5399 )
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2( 0, -14.06 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Front" type="Node2D" parent="Visual"]
+
+[node name="Body" type="Sprite" parent="Visual/Front"]
+texture = ExtResource( 3 )
+
+[node name="Head" type="Sprite" parent="Visual/Front/Body"]
+position = Vector2( 1.22485, -44.5811 )
 texture = ExtResource( 1 )
+offset = Vector2( -0.464844, -37.8789 )
+
+[node name="HandLeft" type="Sprite" parent="Visual/Front/Body"]
+position = Vector2( -61.18, 6.45999 )
+texture = ExtResource( 6 )
+
+[node name="HandRight" type="Sprite" parent="Visual/Front/Body"]
+position = Vector2( 65.36, 9.12 )
+texture = ExtResource( 6 )
+
+[node name="Back" type="Node2D" parent="Visual"]
+visible = false
+
+[node name="Body" type="Sprite" parent="Visual/Back"]
+texture = ExtResource( 4 )
+
+[node name="Head" type="Sprite" parent="Visual/Back/Body"]
+position = Vector2( 1.13998, -71.82 )
+texture = ExtResource( 5 )
+
+[node name="HandLeft" type="Sprite" parent="Visual/Back/Body"]
+show_behind_parent = true
+position = Vector2( -61.18, 6.45999 )
+texture = ExtResource( 6 )
+
+[node name="HandRight" type="Sprite" parent="Visual/Back/Body"]
+show_behind_parent = true
+position = Vector2( 72.58, -1.52588e-05 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.760014, -22.0399 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 4 )
+anims/jump = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
